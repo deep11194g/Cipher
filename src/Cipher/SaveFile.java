@@ -1,71 +1,45 @@
 
-package javaapplication2;
+package Cipher;
 
-public class file extends javax.swing.JFrame {
+import java.io.*;
 
-   public static  int index, cnt=0;
-   public static String user, name[], flag, level;
-   public static String array[][]=new String [100][10];
-    public file(String us, String []usernam, String fl, String lev)
-    {
+public class SaveFile extends javax.swing.JFrame {
+
+   public static  int cnt=0;
+   public static String user, level, text_content;
+   public SaveFile(String us, String lev, String text) {
         initComponents();
         user=us;
-        name=usernam;
-        flag=fl;
         level=lev;
-        int i,j;
-        for(i=0;i<100;i++)
-        {
-            for(j=0;j<10;j++)
-            {
-                array[i][j]="";
-            }
-        }
-        String c="";
-        
-        
-        for( i=0;i<100;i++)
-                {
-                    if(array[i][0].equals(user))
-                        index=i;
-                    
-                    if("".equals(array[i][0]))
-                    {
-                        cnt=i;
-                        break;
-                    }
-                        
-                }
-        
+        text_content=text;
+       
     }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        fn = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        name_text = new javax.swing.JTextField();
+        ok_button = new javax.swing.JButton();
+        back_button = new javax.swing.JButton();
         alert = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Enter File Name:-");
 
-        jButton1.setText("OK");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        ok_button.setText("OK");
+        ok_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                ok_buttonMouseClicked(evt);
             }
         });
 
-        jButton2.setText("Back to Editor");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        back_button.setText("Back to Editor");
+        back_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                back_buttonMouseClicked(evt);
             }
         });
 
@@ -81,16 +55,16 @@ public class file extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(146, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(alert)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(ok_button)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)))
+                                .addComponent(back_button)))
                         .addGap(76, 76, 76))))
         );
         layout.setVerticalGroup(
@@ -99,11 +73,11 @@ public class file extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(name_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(ok_button)
+                    .addComponent(back_button))
                 .addGap(18, 18, 18)
                 .addComponent(alert)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -112,21 +86,18 @@ public class file extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void back_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_back_buttonMouseClicked
         // TODO add your handling code here:
-        new encdec(user, name).setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    static boolean check(String st)
-    {
+    }//GEN-LAST:event_back_buttonMouseClicked
+    
+    //valiadate filename
+    static boolean check(String st) {
         int l=st.length(), fl=0;
         
-        for(int i=0;i<l;i++)
-        {
+        for(int i=0;i<l;i++) {
             char ch=st.charAt(i);
-            if(ch=='+')
-            {
+            if(ch=='+') {
                 fl=1;
                 break;
             }
@@ -136,40 +107,42 @@ public class file extends javax.swing.JFrame {
         else
             return(false);
     }
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    
+    
+    private void ok_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ok_buttonMouseClicked
         // TODO add your handling code here:
-        String s=fn.getText();
+        String s=name_text.getText();
         
-        if(check(s))
-        {    
-        if(flag.equals("save"))
-        {
-            
-            int f=0,c=0;
-            
-            String fin=s+'+'+user+'+'+level;
-            for(int i=0;i<10;i++)
-            {
-                if(array[index][i].equals(fin))
-                {
-                    alert.setText("File Name not available");
-                    f=1;
-                }
-                if(array[index][i].equals(""))
-                   c=i;
+        try {
+                String fname=("D:/Cipher/"+user+"_files.txt");
+                FileWriter fw=new FileWriter(fname,true);
+                BufferedWriter bw=new BufferedWriter(fw);
+                PrintWriter out=new PrintWriter(bw);
+                out.println(s+'+'+user+'+'+level);
+                out.close();
+            } catch(Exception e){
+                alert.setText("ERROR!!Change settings");
             }
-            if(f==0)
-                array[index][c+1]=fin;
-            
-        }
-        }
         
+        if(check(s)) {    
+            int f=0,c=0; 
+            String fin=s+'+'+user+'+'+level;
+            try {
+                String fname=("D:/Cipher/"+fin+".txt");
+                FileWriter fw=new FileWriter(fname,true);
+                BufferedWriter bw=new BufferedWriter(fw);
+                PrintWriter out=new PrintWriter(bw);
+                out.println(text_content);
+                out.close();
+            } catch(Exception e){
+                alert.setText("ERROR!!Change settings");
+            }
+            dispose();
+        }
         else
             alert.setText("Invalid Filename");
         
-        for(int i=0;i<99999999;i++);
-        
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_ok_buttonMouseClicked
 
     public static void main(String args[]) {
       
@@ -187,31 +160,28 @@ public class file extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(file.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaveFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(file.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaveFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(file.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaveFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(file.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaveFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            public void run()
-            {
-                
-                
-                new file(user, name, flag, level).setVisible(true);
+            public void run() {
+                new SaveFile(user, level, text_content).setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel alert;
-    private javax.swing.JTextField fn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton back_button;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField name_text;
+    private javax.swing.JButton ok_button;
     // End of variables declaration//GEN-END:variables
 }

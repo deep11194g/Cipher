@@ -1,22 +1,21 @@
-//Project Cipher by KURMI && SOUMYADEEP..
 
-package javaapplication2;
+package Cipher;
 
 import java.awt.event.MouseEvent;
 import java.io.*;
 import javax.swing.*;
 
-public class encdec extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
 
     public JTextField fld;
-    public static String store="", usernames[], user, lev;
-    public encdec(String us,String nm[]) {
-      
-        initComponents();
+    public static String store="", user, lev;
+    public String list[];
+    public MainFrame(String us) {
+
         user=us;
+        list=new String[10]; 
+        initComponents();
         a.setText(us);
-        /*for(int i=0;i<100;i++)
-            usernames[i]=nm[i];*/
         open_label.setVisible(false);
         open_list.setVisible(false);
         
@@ -38,6 +37,8 @@ public class encdec extends javax.swing.JFrame {
        }
        return(nw);
    }
+   
+   //level easy encoding
     void encodeone() {
         String a=input_text.getText();
         String c="",b="";
@@ -54,7 +55,8 @@ public class encdec extends javax.swing.JFrame {
         }
         output_text.setText(b);
     }
-    
+   
+    //level easy decoding
     void decodeone() {
         String a=input_text.getText();
         String rev="",b="",nw="";
@@ -79,6 +81,7 @@ public class encdec extends javax.swing.JFrame {
         output_text.setText(nw);
     }
     
+    //level hard encoding
     void encodetwo() {
         String at=input_text.getText();
         int lenn=at.length();
@@ -119,6 +122,7 @@ public class encdec extends javax.swing.JFrame {
         output_text.setText(xxx);
     }
     
+    //level medium decoding
     void decodetwo() {
         String a=input_text.getText();
         int i,ind,r,c,len,cn=0,j,cl,l,as,x=0;
@@ -135,7 +139,7 @@ public class encdec extends javax.swing.JFrame {
                 yx+=String.valueOf((char)Integer.parseInt(st.substring(i,i+2)));
                 i++;
             }
-                else
+            else
                 yx+=String.valueOf(st.charAt(i));
         }
         l=yx.length();
@@ -154,6 +158,8 @@ public class encdec extends javax.swing.JFrame {
             strnw+=ar[i][j];
             output_text.setText(strnw);
     }
+    
+    //level hard encoding
     
     void encodethree() {
         String st=input_text.getText();
@@ -207,8 +213,9 @@ public class encdec extends javax.swing.JFrame {
         }
         output_text.setText(conv);
     }
-    
-    void decodethree() {
+ 
+    //level hard decoding
+        void decodethree() {
         
         String s=input_text.getText();
         int l=s.length();
@@ -282,6 +289,7 @@ public class encdec extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jDialog1 = new javax.swing.JDialog();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         input_text = new javax.swing.JTextArea();
         leveOne_radio = new javax.swing.JRadioButton();
@@ -289,11 +297,8 @@ public class encdec extends javax.swing.JFrame {
         leveThree_radio = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         output_text = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
         prw = new javax.swing.JLabel();
         level = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         action_button = new javax.swing.JComboBox();
@@ -304,12 +309,16 @@ public class encdec extends javax.swing.JFrame {
         open_list = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         file_no = new javax.swing.JTextField();
+        no_inp_button = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar6 = new javax.swing.JMenuBar();
-        jMenu11 = new javax.swing.JMenu();
+        file_menu = new javax.swing.JMenu();
         open_button = new javax.swing.JMenuItem();
         save_button = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        user_menu = new javax.swing.JMenu();
         logout_button = new javax.swing.JMenuItem();
+        help_button = new javax.swing.JMenuItem();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -355,6 +364,8 @@ public class encdec extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 51, 51));
 
@@ -392,22 +403,11 @@ public class encdec extends javax.swing.JFrame {
         output_text.setText("EDITED TEXT");
         jScrollPane2.setViewportView(output_text);
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 11)); // NOI18N
-        jLabel2.setText("An S-K COLLABORATION");
-
         prw.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
         prw.setText("Preview:-");
 
-        level.setFont(new java.awt.Font("Tempus Sans ITC", 0, 32)); // NOI18N
+        level.setFont(new java.awt.Font("Trajan Pro", 0, 32)); // NOI18N
         level.setText("______");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel3.setText("ALERT:- THIS VERSION DOESNT CONSIST FILE-HANDLING TECHNIQUES,");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel4.setText("\"Open\" & \"Save\" buttons are not yet active.");
 
         jSeparator3.setForeground(new java.awt.Color(51, 51, 0));
         jSeparator3.setPreferredSize(new java.awt.Dimension(50, 20));
@@ -439,11 +439,27 @@ public class encdec extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Select File No. :");
 
+        no_inp_button.setText("OK");
+        no_inp_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                no_inp_buttonMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tekton Pro Ext", 2, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Cipher v1.0.0");
+
+        jLabel2.setFont(new java.awt.Font("Trajan Pro", 2, 11)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Copyright Reserved");
+
         jMenuBar6.setPreferredSize(new java.awt.Dimension(56, 30));
 
-        jMenu11.setText("File                                                                                ");
-        jMenu11.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        jMenu11.setPreferredSize(new java.awt.Dimension(50, 19));
+        file_menu.setText("File                                                                                ");
+        file_menu.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        file_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        file_menu.setPreferredSize(new java.awt.Dimension(50, 19));
 
         open_button.setText("Open");
         open_button.addActionListener(new java.awt.event.ActionListener() {
@@ -451,7 +467,7 @@ public class encdec extends javax.swing.JFrame {
                 open_buttonActionPerformed(evt);
             }
         });
-        jMenu11.add(open_button);
+        file_menu.add(open_button);
 
         save_button.setText("Save");
         save_button.addActionListener(new java.awt.event.ActionListener() {
@@ -459,15 +475,15 @@ public class encdec extends javax.swing.JFrame {
                 save_buttonActionPerformed(evt);
             }
         });
-        jMenu11.add(save_button);
+        file_menu.add(save_button);
 
-        jMenuBar6.add(jMenu11);
+        jMenuBar6.add(file_menu);
 
-        jMenu3.setText("User  ");
-        jMenu3.setAlignmentX(50.0F);
-        jMenu3.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        jMenu3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenu3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        user_menu.setText("User");
+        user_menu.setAlignmentX(50.0F);
+        user_menu.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        user_menu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        user_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
         logout_button.setText("Logout");
         logout_button.setName("l");
@@ -476,9 +492,17 @@ public class encdec extends javax.swing.JFrame {
                 logout_buttonActionPerformed(evt);
             }
         });
-        jMenu3.add(logout_button);
+        user_menu.add(logout_button);
 
-        jMenuBar6.add(jMenu3);
+        help_button.setText("About");
+        help_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                help_buttonActionPerformed(evt);
+            }
+        });
+        user_menu.add(help_button);
+
+        jMenuBar6.add(user_menu);
 
         setJMenuBar(jMenuBar6);
 
@@ -503,12 +527,12 @@ public class encdec extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(file_no, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(66, 66, 66))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)))))
+                                .addGap(18, 18, 18)
+                                .addComponent(no_inp_button)))
+                        .addGap(26, 26, 26)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -533,18 +557,11 @@ public class encdec extends javax.swing.JFrame {
                                         .addComponent(leveThree_radio)))))))
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addContainerGap())))))
+                .addGap(273, 273, 273)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,17 +596,17 @@ public class encdec extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addComponent(file_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(file_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(no_inp_button))))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -599,7 +616,7 @@ public class encdec extends javax.swing.JFrame {
         lev="easy";
         input_text.setLineWrap(true);
         level.setText("Level- EASY ");
-        input_text.setText("Supports all characters \n:) \n\n Well almost all ;)..");
+        input_text.setText("Supports all characters \n Well almost all");
     }//GEN-LAST:event_leveOne_radioMouseClicked
 
     private void leveTwo_radioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leveTwo_radioMouseClicked
@@ -623,6 +640,7 @@ public class encdec extends javax.swing.JFrame {
         // TODO add your handling code here:
         int slct=action_button.getSelectedIndex();
         output_text.setLineWrap(true);
+        
         if(slct==0) {
             prw.setText("Encryted Text is:-");
             if(leveOne_radio.isSelected())
@@ -632,7 +650,6 @@ public class encdec extends javax.swing.JFrame {
             if(leveThree_radio.isSelected())
                 encodethree();
         }
-        
         else {
             prw.setText("Decryted Text is:-");
             if(leveOne_radio.isSelected())
@@ -646,7 +663,7 @@ public class encdec extends javax.swing.JFrame {
 
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
         // TODO add your handling code here:
-        new login().setVisible(true);
+        new LoginFrame().setVisible(true);
         dispose();
     }//GEN-LAST:event_logout_buttonActionPerformed
     
@@ -657,42 +674,69 @@ public class encdec extends javax.swing.JFrame {
     
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         // TODO add your handling code here:
-        new file(user, lev, output_text.getText()).setVisible(true);
+        System.out.print(user);
+        new SaveFile(user, lev, output_text.getText()).setVisible(true);
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void open_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_buttonActionPerformed
         // TODO add your handling code here:
-        String list[]=new String[10];
         int c=0;
-        String file_name,str;
+        String str;
         open_list.setVisible(true);
         open_label.setVisible(true);
+        
         try {
-            FileReader fin=new FileReader("D:/"+user+"_files.txt");
+            FileReader fin=new FileReader("D:/Cipher/"+user+"_files.txt");
             BufferedReader in=new BufferedReader(fin);
             
             while((str=in.readLine())!= null) {
                 list[c++]=str;
             }
             str="";
-            for(int i=0;i<c;i++)
-                str+=(i+1)+"."+list[i]+"\n";
+            for(int i=0;i<c;i++) 
+                str+=(i+1)+". "+list[i].substring(0,list[i].indexOf('+'))+"\n";
             
             open_list.setText(str);
         } catch(Exception e) {
-            //open_list.setText("!!ERROR!!\nNO File\nFound");
-        }
-        
-       /* try {
-            file_name=list[Integer.parseInt(file_no.getText())].substring(2);
-            FileReader fin=new FileReader("D:/"+file_name+".txt");
-            BufferedReader in=new BufferedReader(fin);
-        } catch(Exception e) {
             open_list.setText("!!ERROR!!\nNO File\nFound");
-        }*/
+        }
         
     }//GEN-LAST:event_open_buttonActionPerformed
 
+    private void help_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_help_buttonActionPerformed
+        // TODO add your handling code here:
+        new About(user).setVisible(true);
+        
+    }//GEN-LAST:event_help_buttonActionPerformed
+
+    private void no_inp_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_no_inp_buttonMouseClicked
+        // TODO add your handling code here:
+        String a,file_name,str="";
+        
+        try {
+            file_name=list[Integer.parseInt(file_no.getText())-1];
+            FileReader fin=new FileReader("D:/Cipher/"+file_name+".txt");
+            BufferedReader in=new BufferedReader(fin);
+            
+            String level=file_name.substring(file_name.lastIndexOf('+'),file_name.length());
+            if(level.equals("easy"))
+                leveOne_radio.setSelected(true);
+            else if(level.equals("med"))
+                leveTwo_radio.setSelected(true);
+            else
+                leveThree_radio.setSelected(true);
+            
+            while((a=in.readLine())!= null) {
+                str+=a;
+            }
+            
+            output_text.setText("");
+            input_text.setText(str);
+        } catch(Exception e) {
+            input_text.setText("!!ERROR!!\nNO File\nFound");
+            output_text.setText("");
+        }     
+    }//GEN-LAST:event_no_inp_buttonMouseClicked
     
     public static void main(String args[]) {
         
@@ -710,20 +754,20 @@ public class encdec extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(encdec.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(encdec.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(encdec.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(encdec.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                 new encdec(user, usernames).setVisible(true);
+                 new MainFrame(user).setVisible(true);
             }
         });
     }
@@ -731,19 +775,18 @@ public class encdec extends javax.swing.JFrame {
     private javax.swing.JLabel a;
     private javax.swing.JComboBox action_button;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JMenu file_menu;
     private javax.swing.JTextField file_no;
+    private javax.swing.JMenuItem help_button;
     private javax.swing.JTextArea input_text;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -755,6 +798,7 @@ public class encdec extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuBar jMenuBar5;
     private javax.swing.JMenuBar jMenuBar6;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
@@ -769,14 +813,14 @@ public class encdec extends javax.swing.JFrame {
     private javax.swing.JRadioButton leveTwo_radio;
     private javax.swing.JLabel level;
     private javax.swing.JMenuItem logout_button;
+    private javax.swing.JButton no_inp_button;
     private javax.swing.JMenuItem open_button;
     private javax.swing.JLabel open_label;
     private javax.swing.JTextArea open_list;
     private javax.swing.JTextArea output_text;
     private javax.swing.JLabel prw;
     private javax.swing.JMenuItem save_button;
+    private javax.swing.JMenu user_menu;
     // End of variables declaration//GEN-END:variables
 
-    
-    
 }
