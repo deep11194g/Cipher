@@ -1,5 +1,6 @@
 
 package Cipher;
+
 import java.io.*;
 import javax.swing.*;
 import java.awt.*;
@@ -309,7 +310,6 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
 //check whether entered username is already present or not
 public void check_validity() {
     flag=1;
@@ -408,7 +408,7 @@ public void check_validity() {
         }
     }//GEN-LAST:event_signup_buttonMouseClicked
 
-    
+   
     private void clear_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clear_buttonMouseClicked
         // TODO add your handling code here:
         username_login.setText("");
@@ -448,14 +448,12 @@ public void check_validity() {
                     set.setText("Login Succesfull");
                     
                     dispose();
-                    new MainFrame(user).setVisible(true);
-                       
+                    new MainFrame(user).setVisible(true);          
                 }
             }
             catch(Exception e) {
                 System.err.println(e);
-            }
-            
+            }         
         }
         else {
             if(check(xx)==false)
