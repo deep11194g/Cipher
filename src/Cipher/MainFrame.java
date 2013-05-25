@@ -685,13 +685,18 @@ public class MainFrame extends javax.swing.JFrame {
         open_list.setVisible(true);
         open_label.setVisible(true);
         
+        
         try {
+            //read the user's list of file names
             FileReader fin=new FileReader("D:/Cipher/"+user+"_files.txt");
             BufferedReader in=new BufferedReader(fin);
             
+            //form list array
             while((str=in.readLine())!= null) {
                 list[c++]=str;
             }
+            
+            //forming file_name_list to be opened for the given user
             str="";
             for(int i=0;i<c;i++) 
                 str+=(i+1)+". "+list[i].substring(0,list[i].indexOf('+'))+"\n";
@@ -718,7 +723,8 @@ public class MainFrame extends javax.swing.JFrame {
             FileReader fin=new FileReader("D:/Cipher/"+file_name+".txt");
             BufferedReader in=new BufferedReader(fin);
             
-            String level=file_name.substring(file_name.lastIndexOf('+'),file_name.length());
+            String level=file_name.substring(file_name.lastIndexOf('+')+1,file_name.length());
+            System.out.println(level);
             if(level.equals("easy"))
                 leveOne_radio.setSelected(true);
             else if(level.equals("med"))
