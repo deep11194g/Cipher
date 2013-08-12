@@ -1,4 +1,3 @@
-
 package Cipher;
 
 import java.io.*;
@@ -6,20 +5,28 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LoginFrame extends javax.swing.JFrame {
-    public String user="";
-    public String name[]=new String[100];
-    public String password[]=new String[100];
+
+    public String user = "";
+    public String name[] = new String[100];
+    public String password[] = new String[100];
     public int count;
     public int flag;
     //variable to check validity
+
     public LoginFrame() {
         initComponents();
-        for(int i=0;i<100;i++) {
-            name[i]="";
-            password[i]="";
+        for (int i = 0; i < 100; i++) {
+            name[i] = "";
+            password[i] = "";
         }
-        count=0;
+        count = 0;
+
+        File uploadfolder = new File("Cipher_logs");
+        if (!uploadfolder.exists()) {
+            uploadfolder.mkdir();
+        }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -311,104 +318,104 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 //check whether entered username is already present or not
-public void check_validity() {
-    flag=1;
-        String x=username_new.getText();
-        String y=new String(pass_new.getPassword());
-        int cnt=0;
+    public void check_validity() {
+        flag = 1;
+        String x = username_new.getText();
+        String y = new String(pass_new.getPassword());
+        int cnt = 0;
         try {
-                FileReader fin=new FileReader("D:/Cipher/Filenames.txt");
-                BufferedReader in=new BufferedReader(fin);
-                
-                String str;
-                while((str=in.readLine())!= null) {
-                    int ind=str.indexOf('+');
-                    String na=str.substring(0,ind);
-                    String pa=str.substring(ind+1);
-                    name[cnt++]=na;
-                    password[cnt++]=pa;
-                    
-                }
-                in.close();
-                
-            } catch(Exception e)  {
-                System.err.println(e);
+            FileReader fin = new FileReader("Cipher_logs/Filenames");
+            BufferedReader in = new BufferedReader(fin);
+
+            String str;
+            while ((str = in.readLine()) != null) {
+                int ind = str.indexOf('+');
+                String na = str.substring(0, ind);
+                String pa = str.substring(ind + 1);
+                name[cnt++] = na;
+                password[cnt++] = pa;
+
             }
-        
-        for(int i=0;i<10;i++)  {
-            if(x.equals(name[i])) {
-                flag=0;
+            in.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            if (x.equals(name[i])) {
+                flag = 0;
                 break;
             }
         }
-        if(flag==0)
+        if (flag == 0) {
             avl.setText("Not Available");
-        else
+        } else {
             avl.setText("Available");
-}
+        }
+    }
     private void check_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_check_buttonMouseClicked
         // TODO add your handling code here:
-       check_validity();
-        
+        check_validity();
+
     }//GEN-LAST:event_check_buttonMouseClicked
-    
+
     //function to check whether entered username is a valid one
     boolean check(String s) {
-        int j,ln;
-        ln=s.length();
-        for(j=0;j<ln;j++)  {
-            if(s.charAt(j)=='+' || s.charAt(j)=='\n')
-                return(false);
-            else if (ln>8)
-                return(false);
+        int j, ln;
+        ln = s.length();
+        for (j = 0; j < ln; j++) {
+            if (s.charAt(j) == '+' || s.charAt(j) == '\n') {
+                return (false);
+            } else if (ln > 8) {
+                return (false);
+            }
         }
-        return(true);
+        return (true);
     }
-    
+
     private void signup_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signup_buttonMouseClicked
         // TODO add your handling code here:
         check_validity();
-        if(count<100) {
+        if (count < 100) {
             try {
-                String x=username_new.getText();
-                String y=new String(pass_new.getPassword());
-                String y2=new String(pass2_new.getPassword());
-                
-                
-                
-                String fname=("D:/Cipher/Filenames.txt");
-                FileWriter fw=new FileWriter(fname,true);
-                BufferedWriter bw=new BufferedWriter(fw);
-                PrintWriter out=new PrintWriter(bw);
-        
-                 if(flag==1 && y.compareTo(y2)==0 && check(y)==true && check(x)==true)  {
-                    
+                String x = username_new.getText();
+                String y = new String(pass_new.getPassword());
+                String y2 = new String(pass2_new.getPassword());
+
+
+
+                String fname = ("Cipher_logs/Filenames");
+                FileWriter fw = new FileWriter(fname, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw);
+
+                if (flag == 1 && y.compareTo(y2) == 0 && check(y) == true && check(x) == true) {
+
                     pr.setText("Succesfully registerd");
                     mtch.setText("");
                     count++;
-                    out.println(x+"+"+y);
+                    out.println(x + "+" + y);
                     out.close();
-                }
-        
-                 else {
-                    if(y.compareTo(y2)!=0)
+                } else {
+                    if (y.compareTo(y2) != 0) {
                         mtch.setText("The Passwords do not match");
-                    if(check(y)==false || check(x)==false)
+                    }
+                    if (check(y) == false || check(x) == false) {
                         mtch.setText("Check format for username/password ");
+                    }
                     pr.setText("Re-enter");
                     avl.setText("Please dont be stubborn");
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 pr.setText("ERROR!! Change File Permissions ");
             }
-        }
-        else {
+        } else {
             pr.setText("Memory full !!");
             avl.setText("No more Registrations :(");
         }
     }//GEN-LAST:event_signup_buttonMouseClicked
 
-   
     private void clear_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clear_buttonMouseClicked
         // TODO add your handling code here:
         username_login.setText("");
@@ -422,44 +429,45 @@ public void check_validity() {
 
     private void signin_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signin_buttonMouseClicked
         // TODO add your handling code here:
-        
-        int flg=-1;
-        String xx=username_login.getText();      
-        String yy=new String(pass_login.getPassword());
-        
-        if(check(xx)==true && check(yy)==true)  {
+
+        int flg = -1;
+        String xx = username_login.getText();
+        String yy = new String(pass_login.getPassword());
+
+        if (check(xx) == true && check(yy) == true) {
             try {
-                FileReader fin=new FileReader("D:/Cipher/Filenames.txt");
-                BufferedReader in=new BufferedReader(fin);
-                
-                String str="";
-                while((str=in.readLine())!= null) {
-                    int ind=str.indexOf('+');
-                    String na=str.substring(0,ind);
-                    String pa=str.substring(ind+1);
-                    if(xx.equals(na) && yy.equals(pa))
-                        flg=1;
+                FileReader fin = new FileReader("Cipher_logs/Filenames");
+                BufferedReader in = new BufferedReader(fin);
+
+                String str = "";
+                while ((str = in.readLine()) != null) {
+                    int ind = str.indexOf('+');
+                    String na = str.substring(0, ind);
+                    String pa = str.substring(ind + 1);
+                    if (xx.equals(na) && yy.equals(pa)) {
+                        flg = 1;
+                    }
                 }
-                
-                if(flg==-1)
+
+                if (flg == -1) {
                     set.setText("Check Username/Password");
-                else {
-                    user=xx;   
+                } else {
+                    user = xx;
                     set.setText("Login Succesfull");
-                    
+
                     dispose();
-                    new MainFrame(user).setVisible(true);          
+                    new MainFrame(user).setVisible(true);
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 System.err.println(e);
-            }         
-        }
-        else {
-            if(check(xx)==false)
+            }
+        } else {
+            if (check(xx) == false) {
                 set.setText("Check format for username/password ");
-            if(check(xx)==false)
+            }
+            if (check(xx) == false) {
                 set.setText("Check format for username/password ");
+            }
         }
     }//GEN-LAST:event_signin_buttonMouseClicked
 
@@ -488,10 +496,9 @@ public void check_validity() {
         pass2_new.setText("");
     }//GEN-LAST:event_pass2_newMouseClicked
 
-    
-    public static void main(String args[])  {
-        
-        
+    public static void main(String args[]) {
+
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -509,8 +516,9 @@ public void check_validity() {
             java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        java.awt.EventQueue.invokeLater (new Runnable() {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new LoginFrame().setVisible(true);
             }

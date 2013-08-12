@@ -1,12 +1,12 @@
-
 package Cipher;
 
 public class About extends javax.swing.JFrame {
-public static String us;
-   
-    public About( String user) {
+
+    public static String us;
+
+    public About(String user) {
         initComponents();
-        us=user;
+        us = user;
         s.setText(user);
     }
 
@@ -132,7 +132,7 @@ public static String us;
     }//GEN-LAST:event_jButton1MouseClicked
 
     public static void main(String args[]) {
-    
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /*
          * If Nimbus (introduced in Java SE 6) is not available, stay with the

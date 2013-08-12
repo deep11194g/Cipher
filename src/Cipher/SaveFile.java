@@ -1,18 +1,18 @@
-
 package Cipher;
 
 import java.io.*;
 
 public class SaveFile extends javax.swing.JFrame {
 
-   public static  int cnt=0;
-   public static String user, level, text_content;
-   public SaveFile(String us, String lev, String text) {
+    public static int cnt = 0;
+    public static String user, level, text_content;
+
+    public SaveFile(String us, String lev, String text) {
         initComponents();
-        user=us;
-        level=lev;
-        text_content=text;
-       
+        user = us;
+        level = lev;
+        text_content = text;
+
     }
 
     @SuppressWarnings("unchecked")
@@ -90,62 +90,62 @@ public class SaveFile extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_back_buttonMouseClicked
-    
+
     //valiadate filename
     static boolean check(String st) {
-        int l=st.length(), fl=0;
-        
-        for(int i=0;i<l;i++) {
-            char ch=st.charAt(i);
-            if(ch=='+') {
-                fl=1;
+        int l = st.length(), fl = 0;
+
+        for (int i = 0; i < l; i++) {
+            char ch = st.charAt(i);
+            if (ch == '+') {
+                fl = 1;
                 break;
             }
         }
-        if(!"".equals(st) && l>0 && l<=5 && fl==0)
-            return(true);
-        else
-            return(false);
+        if (!"".equals(st) && l > 0 && l <= 5 && fl == 0) {
+            return (true);
+        } else {
+            return (false);
+        }
     }
-    
-    
+
     private void ok_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ok_buttonMouseClicked
         // TODO add your handling code here:
-        String s=name_text.getText();
-        
+        String s = name_text.getText();
+
         try {
-                String fname=("D:/Cipher/"+user+"_files.txt");
-                FileWriter fw=new FileWriter(fname,true);
-                BufferedWriter bw=new BufferedWriter(fw);
-                PrintWriter out=new PrintWriter(bw);
-                out.println(s+'+'+user+'+'+level);
-                out.close();
-            } catch(Exception e){
-                alert.setText("ERROR!!Change settings");
-            }
-        
-        if(check(s)) {    
-            int f=0,c=0; 
-            String fin=s+'+'+user+'+'+level;
+            String fname = ("Cipher_logs/" + user + "_files");
+            FileWriter fw = new FileWriter(fname, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw);
+            out.println(s + '+' + user + '+' + level);
+            out.close();
+        } catch (Exception e) {
+            alert.setText("ERROR!!Change settings");
+        }
+
+        if (check(s)) {
+            int f = 0, c = 0;
+            String fin = s + '+' + user + '+' + level;
             try {
-                String fname=("D:/Cipher/"+fin+".txt");
-                FileWriter fw=new FileWriter(fname,true);
-                BufferedWriter bw=new BufferedWriter(fw);
-                PrintWriter out=new PrintWriter(bw);
+                String fname = ("Cipher_logs/" + fin);
+                FileWriter fw = new FileWriter(fname, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw);
                 out.println(text_content);
                 out.close();
-            } catch(Exception e){
+            } catch (Exception e) {
                 alert.setText("ERROR!!Change settings");
             }
             dispose();
-        }
-        else
+        } else {
             alert.setText("Invalid Filename");
-        
+        }
+
     }//GEN-LAST:event_ok_buttonMouseClicked
 
     public static void main(String args[]) {
-      
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /*
          * If Nimbus (introduced in Java SE 6) is not available, stay with the

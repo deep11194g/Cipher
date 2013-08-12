@@ -1,4 +1,3 @@
-
 package Cipher;
 
 import java.awt.event.MouseEvent;
@@ -8,264 +7,279 @@ import javax.swing.*;
 public class MainFrame extends javax.swing.JFrame {
 
     public JTextField fld;
-    public static String store="", user, lev;
+    public static String store = "", user, lev;
     public String list[];
+
     public MainFrame(String us) {
 
-        user=us;
-        list=new String[10]; 
+        user = us;
+        list = new String[10];
         initComponents();
         a.setText(us);
         open_label.setVisible(false);
         open_list.setVisible(false);
-        
+
     }
-   String editfunc(String x)  {
-       String nw="";
-       int l=x.length(),i,j;
-       for(i=0;i<l;i++)  {
-           char ch=x.charAt(i),h;
-           if(ch==' ') {    
-               h=ch;
-           
-               while(h!=' ') {
-                   nw+='\n';
-                   i++;
-               }
-           }
-           nw+=ch;
-       }
-       return(nw);
-   }
-   
-   //level easy encoding
-    void encodeone() {
-        String a=input_text.getText();
-        String c="",b="";
-        int i,l;
-        l=a.length();
-        a=a.toUpperCase();
-        for(i=0;i<l;i++) {
-            char ch=a.charAt(i);
-            c+=String.valueOf((int)ch);
+
+    String editfunc(String x) {
+        String nw = "";
+        int l = x.length(), i, j;
+        for (i = 0; i < l; i++) {
+            char ch = x.charAt(i), h;
+            if (ch == ' ') {
+                h = ch;
+
+                while (h != ' ') {
+                    nw += '\n';
+                    i++;
+                }
+            }
+            nw += ch;
         }
-        for(i=0;i<c.length();i++) {
-            char ch=c.charAt(i);
-            b=String.valueOf(ch)+b;
+        return (nw);
+    }
+
+    //level easy encoding
+    void encodeone() {
+        String a = input_text.getText();
+        String c = "", b = "";
+        int i, l;
+        l = a.length();
+        a = a.toUpperCase();
+        for (i = 0; i < l; i++) {
+            char ch = a.charAt(i);
+            c += String.valueOf((int) ch);
+        }
+        for (i = 0; i < c.length(); i++) {
+            char ch = c.charAt(i);
+            b = String.valueOf(ch) + b;
         }
         output_text.setText(b);
     }
-   
+
     //level easy decoding
     void decodeone() {
-        String a=input_text.getText();
-        String rev="",b="",nw="";
-        int l,i,fl=0,x;
+        String a = input_text.getText();
+        String rev = "", b = "", nw = "";
+        int l, i, fl = 0, x;
         char ch;
-        l=a.length();
-        for(i=l-1;i>=0;i--) {
-            ch=a.charAt(i);
-            rev+=String.valueOf(ch);
+        l = a.length();
+        for (i = l - 1; i >= 0; i--) {
+            ch = a.charAt(i);
+            rev += String.valueOf(ch);
         }
-        for(i=0;i<l;) {
-            x=Integer.parseInt(rev.substring(i,i+2));
-            if ((x>=97 && x<=99) || (x>=32 || x<=90) )
-                i+=2;
-            else if(x>=100 && x<=125) {
-                b=rev.substring(i,i+3);
-                x=Integer.parseInt(b);
-                i+=3;
+        for (i = 0; i < l;) {
+            x = Integer.parseInt(rev.substring(i, i + 2));
+            if ((x >= 97 && x <= 99) || (x >= 32 || x <= 90)) {
+                i += 2;
+            } else if (x >= 100 && x <= 125) {
+                b = rev.substring(i, i + 3);
+                x = Integer.parseInt(b);
+                i += 3;
             }
-            nw+=String.valueOf((char)x);
+            nw += String.valueOf((char) x);
         }
         output_text.setText(nw);
     }
-    
+
     //level hard encoding
     void encodetwo() {
-        String at=input_text.getText();
-        int lenn=at.length();
-        int ind=at.indexOf('#');
-        String a=at.substring(0,ind);
-        int pc=Integer.parseInt(at.substring((ind+1),lenn));
-        int x=pc,y=pc,c=0,len,r,mr,i,j,cn=0;
-        String str="";
-        char ch=' ';
-        len=a.length();
-        while(x>0) {
-            x/=10;
+        String at = input_text.getText();
+        int lenn = at.length();
+        int ind = at.indexOf('#');
+        String a = at.substring(0, ind);
+        int pc = Integer.parseInt(at.substring((ind + 1), lenn));
+        int x = pc, y = pc, c = 0, len, r, mr, i, j, cn = 0;
+        String str = "";
+        char ch = ' ';
+        len = a.length();
+        while (x > 0) {
+            x /= 10;
             c++;
         }
-        r=(len%c==0)?(len/c):((len/c)+1);
-        String ar[][]=new String[r][c];
-        for(i=0;i<r;i++)
-        for(j=0;j<c;j++)
-            ar[i][j]="00";
-        for(i=0;i<r;i++) {
-            for(j=0;j<c;j++) {
-                if(cn<len) {
-                    ch=a.charAt(cn++);
-                    if((ch>=65&&ch<=90)||(ch>=97&&ch<=122))
-                    ar[i][j]=String.valueOf(ch);
-                    else
-                    ar[i][j]=String.valueOf((int)ch);
+        r = (len % c == 0) ? (len / c) : ((len / c) + 1);
+        String ar[][] = new String[r][c];
+        for (i = 0; i < r; i++) {
+            for (j = 0; j < c; j++) {
+                ar[i][j] = "00";
+            }
+        }
+        for (i = 0; i < r; i++) {
+            for (j = 0; j < c; j++) {
+                if (cn < len) {
+                    ch = a.charAt(cn++);
+                    if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)) {
+                        ar[i][j] = String.valueOf(ch);
+                    } else {
+                        ar[i][j] = String.valueOf((int) ch);
+                    }
                 }
             }
         }
-        while(y>0) {
-            mr=(y%10)-1;
-            for(i=0;i<r;i++)
-            str+=ar[i][mr];
-            y/=10;
+        while (y > 0) {
+            mr = (y % 10) - 1;
+            for (i = 0; i < r; i++) {
+                str += ar[i][mr];
+            }
+            y /= 10;
         }//END OF WHILE
-        String xxx=str+"#"+pc;
+        String xxx = str + "#" + pc;
         output_text.setText(xxx);
     }
-    
+
     //level medium decoding
     void decodetwo() {
-        String a=input_text.getText();
-        int i,ind,r,c,len,cn=0,j,cl,l,as,x=0;
-        String pc,st,strnw="",yx="";
-        char ch,chr;
-        len=a.length();
-        ind=a.indexOf('#');
-        st=a.substring(0,ind);
-        pc=a.substring((ind+1),len);
-        l=st.length();
-        for(i=0;i<l;i++) {
-            int cx=(int)st.charAt(i);
-            if(cx>=48 && cx<=57) {   
-                yx+=String.valueOf((char)Integer.parseInt(st.substring(i,i+2)));
+        String a = input_text.getText();
+        int i, ind, r, c, len, cn = 0, j, cl, l, as, x = 0;
+        String pc, st, strnw = "", yx = "";
+        char ch, chr;
+        len = a.length();
+        ind = a.indexOf('#');
+        st = a.substring(0, ind);
+        pc = a.substring((ind + 1), len);
+        l = st.length();
+        for (i = 0; i < l; i++) {
+            int cx = (int) st.charAt(i);
+            if (cx >= 48 && cx <= 57) {
+                yx += String.valueOf((char) Integer.parseInt(st.substring(i, i + 2)));
                 i++;
+            } else {
+                yx += String.valueOf(st.charAt(i));
             }
-            else
-                yx+=String.valueOf(st.charAt(i));
         }
-        l=yx.length();
-        c=pc.length();
-        r=(l/c);
-        String ar[][]=new String[r][c];
-        for(i=c-1;i>=0;i--) {
-            ch=pc.charAt(i);
-            cl=Integer.parseInt(String.valueOf(ch));
-            for(j=0;j<r;j++)
-                ar[j][cl-1]=String.valueOf(yx.charAt(cn++));
-                
-        }
-            for(i=0;i<r;i++)
-            for(j=0;j<c;j++)
-            strnw+=ar[i][j];
-            output_text.setText(strnw);
-    }
-    
-    //level hard encoding
-    
-    void encodethree() {
-        String st=input_text.getText();
-        int len=st.length(); int h=len;
-        for(int u=0;u <3-(len%3); u++)
-            st+=".";
-        len=st.length();
-        String xx="",nw="";
-        char bsvalue[]={'A',  'B',  'C',  'D',  'E',  'F',  'G',
-                        'H',  'I',  'J',  'K',  'L',  'M',  'N',
-                        'O',  'P',  'Q',  'R',  'S',  'T',  'U', 
-                        'V',  'W',  'X',  'Y',  'Z',
-                        'a',  'b',  'c',  'd',  'e',  'f',  'g',
-                        'h',  'i',  'j',  'k',  'l',  'm',  'n',
-                        'o',  'p',  'q',  'r',  's',  't',  'u', 
-                        'v',  'w',  'x',  'y',  'z',
-                        '0',  '1',  '2',  '3',  '4',  '5', 
-                        '6',  '7',  '8',  '9',  '.',  ','};
-                        
+        l = yx.length();
+        c = pc.length();
+        r = (l / c);
+        String ar[][] = new String[r][c];
+        for (i = c - 1; i >= 0; i--) {
+            ch = pc.charAt(i);
+            cl = Integer.parseInt(String.valueOf(ch));
+            for (j = 0; j < r; j++) {
+                ar[j][cl - 1] = String.valueOf(yx.charAt(cn++));
+            }
 
-        for(int i=0;i<len;i++) {
-            char ch=st.charAt(i);
-            int as=(int)ch;
-            int ar[]={0,0,0,0,0,0,0,0},cn=7;
-            while(as>0) {
-                ar[cn--]=as%2;
-                as/=2;
-            }
-            for(int j=0;j<8;j++)
-                xx+=String.valueOf(ar[j]);
-            nw+=xx;
-            xx="";
         }
-        String conv="";
-        int ln=nw.length(),b=ln%6;
-        for(int u=0;u<=b+1;u++)
-            nw="0"+nw;
-            ln+=b+2;
-            int k=ln;
-        for(;k>=5;k-=6) {
-            String jj=nw.substring(k-6,k);
-            int mm=Integer.valueOf(jj);
-            int cnn=0,sm=0,r;
-            while(mm>0)
-            {
-                r=mm%10;
-                sm+=((int)Math.pow(2,cnn++))*r;
-                mm/=10;
+        for (i = 0; i < r; i++) {
+            for (j = 0; j < c; j++) {
+                strnw += ar[i][j];
             }
-            conv=String.valueOf(bsvalue[sm])+conv;
+        }
+        output_text.setText(strnw);
+    }
+
+    //level hard encoding
+    void encodethree() {
+        String st = input_text.getText();
+        int len = st.length();
+        int h = len;
+        for (int u = 0; u < 3 - (len % 3); u++) {
+            st += ".";
+        }
+        len = st.length();
+        String xx = "", nw = "";
+        char bsvalue[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
+            'H', 'I', 'J', 'K', 'L', 'M', 'N',
+            'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+            'V', 'W', 'X', 'Y', 'Z',
+            'a', 'b', 'c', 'd', 'e', 'f', 'g',
+            'h', 'i', 'j', 'k', 'l', 'm', 'n',
+            'o', 'p', 'q', 'r', 's', 't', 'u',
+            'v', 'w', 'x', 'y', 'z',
+            '0', '1', '2', '3', '4', '5',
+            '6', '7', '8', '9', '.', ','};
+
+
+        for (int i = 0; i < len; i++) {
+            char ch = st.charAt(i);
+            int as = (int) ch;
+            int ar[] = {0, 0, 0, 0, 0, 0, 0, 0}, cn = 7;
+            while (as > 0) {
+                ar[cn--] = as % 2;
+                as /= 2;
+            }
+            for (int j = 0; j < 8; j++) {
+                xx += String.valueOf(ar[j]);
+            }
+            nw += xx;
+            xx = "";
+        }
+        String conv = "";
+        int ln = nw.length(), b = ln % 6;
+        for (int u = 0; u <= b + 1; u++) {
+            nw = "0" + nw;
+        }
+        ln += b + 2;
+        int k = ln;
+        for (; k >= 5; k -= 6) {
+            String jj = nw.substring(k - 6, k);
+            int mm = Integer.valueOf(jj);
+            int cnn = 0, sm = 0, r;
+            while (mm > 0) {
+                r = mm % 10;
+                sm += ((int) Math.pow(2, cnn++)) * r;
+                mm /= 10;
+            }
+            conv = String.valueOf(bsvalue[sm]) + conv;
         }
         output_text.setText(conv);
     }
- 
+
     //level hard decoding
-        void decodethree() {
-        
-        String s=input_text.getText();
-        int l=s.length();
-        char bsvalue[]={'A',  'B',  'C',  'D',  'E',  'F',  'G',
-                        'H',  'I',  'J',  'K',  'L',  'M',  'N',
-                        'O',  'P',  'Q',  'R',  'S',  'T',  'U', 
-                        'V',  'W',  'X',  'Y',  'Z',
-                        'a',  'b',  'c',  'd',  'e',  'f',  'g',
-                        'h',  'i',  'j',  'k',  'l',  'm',  'n',
-                        'o',  'p',  'q',  'r',  's',  't',  'u', 
-                        'v',  'w',  'x',  'y',  'z',
-                        '0',  '1',  '2',  '3',  '4',  '5', 
-                        '6',  '7',  '8',  '9',  '.',  ','};
-       
-       String xx="",nw="";
-       for(int j=0;j<l;j++) {
-           int i=0;
-           char ch=s.charAt(j);
-           for(i=0;i<64;i++) {
-               if(bsvalue[i]==ch)
-               break;
-           }
-           int as=i;
-           int ar[]={0,0,0,0,0,0},cn=5;
-           while(as>0) {
-               ar[cn--]=as%2;
-               as/=2;
-           }
-           for(int k=0;k<6;k++)
-               xx+=String.valueOf(ar[k]);
-           nw+=xx;
-           xx="";
-       }
-       String conv="";
-       nw+="9";
-       int ln=nw.length(),b=(ln-1)%8;
-        for(int u=0;u<b;u++)
-            nw="0"+nw;
-       for(int k=ln-1;k>=7;k-=8) {
-           int mm=Integer.valueOf(nw.substring(k-8,k));
-           int cnn=0,sm=0,r;
-           while(mm>0) {
-               r=mm%10;
-               sm+=((int)Math.pow(2,cnn++))*r;
-               mm/=10;
-           }
-           conv=String.valueOf((char)sm)+conv;
-       }
-       output_text.setText(conv);
-    }    
+    void decodethree() {
+
+        String s = input_text.getText();
+        int l = s.length();
+        char bsvalue[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
+            'H', 'I', 'J', 'K', 'L', 'M', 'N',
+            'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+            'V', 'W', 'X', 'Y', 'Z',
+            'a', 'b', 'c', 'd', 'e', 'f', 'g',
+            'h', 'i', 'j', 'k', 'l', 'm', 'n',
+            'o', 'p', 'q', 'r', 's', 't', 'u',
+            'v', 'w', 'x', 'y', 'z',
+            '0', '1', '2', '3', '4', '5',
+            '6', '7', '8', '9', '.', ','};
+
+        String xx = "", nw = "";
+        for (int j = 0; j < l; j++) {
+            int i = 0;
+            char ch = s.charAt(j);
+            for (i = 0; i < 64; i++) {
+                if (bsvalue[i] == ch) {
+                    break;
+                }
+            }
+            int as = i;
+            int ar[] = {0, 0, 0, 0, 0, 0}, cn = 5;
+            while (as > 0) {
+                ar[cn--] = as % 2;
+                as /= 2;
+            }
+            for (int k = 0; k < 6; k++) {
+                xx += String.valueOf(ar[k]);
+            }
+            nw += xx;
+            xx = "";
+        }
+        String conv = "";
+        nw += "9";
+        int ln = nw.length(), b = (ln - 1) % 8;
+        for (int u = 0; u < b; u++) {
+            nw = "0" + nw;
+        }
+        for (int k = ln - 1; k >= 7; k -= 8) {
+            int mm = Integer.valueOf(nw.substring(k - 8, k));
+            int cnn = 0, sm = 0, r;
+            while (mm > 0) {
+                r = mm % 10;
+                sm += ((int) Math.pow(2, cnn++)) * r;
+                mm /= 10;
+            }
+            conv = String.valueOf((char) sm) + conv;
+        }
+        output_text.setText(conv);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -613,7 +627,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void leveOne_radioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leveOne_radioMouseClicked
         // TODO add your handling code here:
-        lev="easy";
+        lev = "easy";
         input_text.setLineWrap(true);
         level.setText("Level- EASY ");
         input_text.setText("Supports all characters \n Well almost all");
@@ -621,7 +635,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void leveTwo_radioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leveTwo_radioMouseClicked
         // TODO add your handling code here:
-        lev="med";
+        lev = "med";
         input_text.setLineWrap(true);
         level.setText("Level- MEDIUM ");
         input_text.setText("Enter message with policy number. \n Format:- I am a boy#1432 "
@@ -631,33 +645,38 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void leveThree_radioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leveThree_radioMouseClicked
         // TODO add your handling code here:
-        lev="hard";
+        lev = "hard";
         input_text.setLineWrap(true);
         input_text.setText("Note:- Supports only numbers and letters.");
     }//GEN-LAST:event_leveThree_radioMouseClicked
 
     private void action_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_action_buttonActionPerformed
         // TODO add your handling code here:
-        int slct=action_button.getSelectedIndex();
+        int slct = action_button.getSelectedIndex();
         output_text.setLineWrap(true);
-        
-        if(slct==0) {
+
+        if (slct == 0) {
             prw.setText("Encryted Text is:-");
-            if(leveOne_radio.isSelected())
+            if (leveOne_radio.isSelected()) {
                 encodeone();
-            if(leveTwo_radio.isSelected())
+            }
+            if (leveTwo_radio.isSelected()) {
                 encodetwo();
-            if(leveThree_radio.isSelected())
+            }
+            if (leveThree_radio.isSelected()) {
                 encodethree();
-        }
-        else {
+            }
+        } else {
             prw.setText("Decryted Text is:-");
-            if(leveOne_radio.isSelected())
+            if (leveOne_radio.isSelected()) {
                 decodeone();
-            if(leveTwo_radio.isSelected())
+            }
+            if (leveTwo_radio.isSelected()) {
                 decodetwo();
-            if(leveThree_radio.isSelected())
+            }
+            if (leveThree_radio.isSelected()) {
                 decodethree();
+            }
         }
     }//GEN-LAST:event_action_buttonActionPerformed
 
@@ -666,12 +685,11 @@ public class MainFrame extends javax.swing.JFrame {
         new LoginFrame().setVisible(true);
         dispose();
     }//GEN-LAST:event_logout_buttonActionPerformed
-    
-    
+
     public void mouseEntered(MouseEvent e) {
         fld = (JTextField) e.getSource();
     }
-    
+
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         // TODO add your handling code here:
         System.out.print(user);
@@ -680,72 +698,74 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void open_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_buttonActionPerformed
         // TODO add your handling code here:
-        int c=0;
+        int c = 0;
         String str;
         open_list.setVisible(true);
         open_label.setVisible(true);
-        
-        
+
+
         try {
             //read the user's list of file names
-            FileReader fin=new FileReader("D:/Cipher/"+user+"_files.txt");
-            BufferedReader in=new BufferedReader(fin);
-            
+            FileReader fin = new FileReader("Cipher_logs/" + user + "_files");
+            BufferedReader in = new BufferedReader(fin);
+
             //form list array
-            while((str=in.readLine())!= null) {
-                list[c++]=str;
+            while ((str = in.readLine()) != null) {
+                list[c++] = str;
             }
-            
+
             //forming file_name_list to be opened for the given user
-            str="";
-            for(int i=0;i<c;i++) 
-                str+=(i+1)+". "+list[i].substring(0,list[i].indexOf('+'))+"\n";
-            
+            str = "";
+            for (int i = 0; i < c; i++) {
+                str += (i + 1) + ". " + list[i].substring(0, list[i].indexOf('+')) + "\n";
+            }
+
             open_list.setText(str);
-        } catch(Exception e) {
+        } catch (Exception e) {
             open_list.setText("!!ERROR!!\nNO File\nFound");
         }
-        
+
     }//GEN-LAST:event_open_buttonActionPerformed
 
     private void help_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_help_buttonActionPerformed
         // TODO add your handling code here:
         new About(user).setVisible(true);
-        
+
     }//GEN-LAST:event_help_buttonActionPerformed
 
     private void no_inp_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_no_inp_buttonMouseClicked
         // TODO add your handling code here:
-        String a,file_name,str="";
-        
+        String a, file_name, str = "";
+
         try {
-            file_name=list[Integer.parseInt(file_no.getText())-1];
-            FileReader fin=new FileReader("D:/Cipher/"+file_name+".txt");
-            BufferedReader in=new BufferedReader(fin);
-            
-            String level=file_name.substring(file_name.lastIndexOf('+')+1,file_name.length());
+            file_name = list[Integer.parseInt(file_no.getText()) - 1];
+            FileReader fin = new FileReader("Cipher_logs/" + file_name);
+            BufferedReader in = new BufferedReader(fin);
+
+            String level = file_name.substring(file_name.lastIndexOf('+') + 1, file_name.length());
             System.out.println(level);
-            if(level.equals("easy"))
+            if (level.equals("easy")) {
                 leveOne_radio.setSelected(true);
-            else if(level.equals("med"))
+            } else if (level.equals("med")) {
                 leveTwo_radio.setSelected(true);
-            else
+            } else {
                 leveThree_radio.setSelected(true);
-            
-            while((a=in.readLine())!= null) {
-                str+=a;
             }
-            
+
+            while ((a = in.readLine()) != null) {
+                str += a;
+            }
+
             output_text.setText("");
             input_text.setText(str);
-        } catch(Exception e) {
+        } catch (Exception e) {
             input_text.setText("!!ERROR!!\nNO File\nFound");
             output_text.setText("");
-        }     
+        }
     }//GEN-LAST:event_no_inp_buttonMouseClicked
-    
+
     public static void main(String args[]) {
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /*
          * If Nimbus (introduced in Java SE 6) is not available, stay with the
@@ -773,7 +793,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                 new MainFrame(user).setVisible(true);
+                new MainFrame(user).setVisible(true);
             }
         });
     }
@@ -828,5 +848,4 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem save_button;
     private javax.swing.JMenu user_menu;
     // End of variables declaration//GEN-END:variables
-
 }
