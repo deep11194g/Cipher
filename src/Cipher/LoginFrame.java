@@ -1,8 +1,6 @@
 package Cipher;
 
 import java.io.*;
-import javax.swing.*;
-import java.awt.*;
 
 public class LoginFrame extends javax.swing.JFrame {
 
@@ -10,8 +8,7 @@ public class LoginFrame extends javax.swing.JFrame {
     public String name[] = new String[100];
     public String password[] = new String[100];
     public int count;
-    public int flag;
-    //variable to check validity
+    public int flag;                //variable to check validity
 
     public LoginFrame() {
         initComponents();
@@ -317,6 +314,19 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static String stringToHexString(String s) {
+        try {
+            byte[] b = s.getBytes("UTF-16");
+            String result = "";
+            for (int i = 0; i < b.length; i++) {
+                result += Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1);
+            }
+            return result;
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
 //check whether entered username is already present or not
     public void check_validity() {
         flag = 1;
@@ -383,8 +393,6 @@ public class LoginFrame extends javax.swing.JFrame {
                 String y = new String(pass_new.getPassword());
                 String y2 = new String(pass2_new.getPassword());
 
-
-
                 String fname = ("Cipher_logs/Filenames");
                 FileWriter fw = new FileWriter(fname, true);
                 BufferedWriter bw = new BufferedWriter(fw);
@@ -395,6 +403,9 @@ public class LoginFrame extends javax.swing.JFrame {
                     pr.setText("Succesfully registerd");
                     mtch.setText("");
                     count++;
+
+                    y = stringToHexString(y);
+
                     out.println(x + "+" + y);
                     out.close();
                 } else {
@@ -436,6 +447,9 @@ public class LoginFrame extends javax.swing.JFrame {
 
         if (check(xx) == true && check(yy) == true) {
             try {
+
+                yy = stringToHexString(yy);
+
                 FileReader fin = new FileReader("Cipher_logs/Filenames");
                 BufferedReader in = new BufferedReader(fin);
 
@@ -462,10 +476,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 System.err.println(e);
             }
         } else {
-            if (check(xx) == false) {
-                set.setText("Check format for username/password ");
-            }
-            if (check(xx) == false) {
+            if (check(xx) == false || check(yy) == false) {
                 set.setText("Check format for username/password ");
             }
         }
@@ -474,26 +485,36 @@ public class LoginFrame extends javax.swing.JFrame {
     private void username_newMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_username_newMouseClicked
         // TODO add your handling code here:
         username_new.setText("");
+        username_new.setFont(new java.awt.Font("Tahoma", 0, 13)); 
+        username_new.setForeground(new java.awt.Color(0, 0, 0));
     }//GEN-LAST:event_username_newMouseClicked
 
     private void pass_newMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass_newMouseClicked
         // TODO add your handling code here:
         pass_new.setText("");
+        pass_new.setFont(new java.awt.Font("Tahoma", 0, 13)); 
+        pass_new.setForeground(new java.awt.Color(0, 0, 0));
     }//GEN-LAST:event_pass_newMouseClicked
 
     private void pass_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass_loginMouseClicked
         // TODO add your handling code here:
         pass_login.setText("");
+        pass_login.setFont(new java.awt.Font("Tahoma", 0, 13)); 
+        pass_login.setForeground(new java.awt.Color(0, 0, 0));
     }//GEN-LAST:event_pass_loginMouseClicked
 
     private void username_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_username_loginMouseClicked
         // TODO add your handling code here:
         username_login.setText("");
+        username_login.setFont(new java.awt.Font("Tahoma", 0, 13)); 
+        username_login.setForeground(new java.awt.Color(0, 0, 0));
     }//GEN-LAST:event_username_loginMouseClicked
 
     private void pass2_newMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass2_newMouseClicked
         // TODO add your handling code here:
         pass2_new.setText("");
+        pass2_new.setFont(new java.awt.Font("Tahoma", 0, 13)); 
+        pass2_new.setForeground(new java.awt.Color(0, 0, 0));
     }//GEN-LAST:event_pass2_newMouseClicked
 
     public static void main(String args[]) {

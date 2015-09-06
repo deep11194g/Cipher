@@ -182,7 +182,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="logout_button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
-                <Property name="name" type="java.lang.String" value="l"/>
+                <Property name="name" type="java.lang.String" value="l" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logout_buttonActionPerformed"/>
@@ -210,6 +210,7 @@
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar6"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
